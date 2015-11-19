@@ -2,14 +2,22 @@ import java.util.ArrayList;
 
 public class Environment {
     Square[][] board = new Square[27][27];
-    ArrayList soldierCollection = new ArrayList();
-    ArrayList foragerCollection = new ArrayList();
-    ArrayList scoutCollection = new ArrayList();
-    ArrayList balaCollection = new ArrayList();
+    ArrayList soldierCollection;
+    ArrayList foragerCollection;
+    ArrayList scoutCollection;
+    ArrayList balaCollection;
+    QueenAnt queenAnt;
 
 
     public Environment() {
 
+        soldierCollection = new ArrayList();
+        foragerCollection = new ArrayList();
+        scoutCollection = new ArrayList();
+        balaCollection = new ArrayList();
+        queenAnt = new QueenAnt();
+
+        //Builds the board of squars, determines which squares get food and how much
         for(int i = 0; i < 27; ++i) {
             for (int j = 0; j < 27; ++j) {
                 board[i][j] = new Square();
@@ -19,31 +27,29 @@ public class Environment {
             }
         }
 
-        Square queenSQ = board[13][13];
+        Square colonyEntrance = board[13][13];
 
-        queenSQ.revealState = true;
-        queenSQ.queentAnt = new QueenAnt();
-        queenSQ.queenPresent = true;
-        queenSQ.foodUnits = 1000;
+        colonyEntrance.revealState = true;
+        colonyEntrance.queenPresent = true;
+        colonyEntrance.foodUnits = 1000;
 
+        //Populate the colony entrance with friendly ants
         for (int i = 0; i < 10; ++i) {
-            SoldierAnt temp = new SoldierAnt();
-            queenSQ.soldierAnts.add(temp);
-            soldierCollection.add(temp);
+            colonyEntrance.friendlyAnts += 1;
+            soldierCollection.add(new SoldierAnt());
         }
 
         for (int i = 0; i < 50; ++i) {
-            ForagerAnt temp = new ForagerAnt();
-            queenSQ.foragerAnts.add(temp);
-            foragerCollection.add(temp);
+            colonyEntrance.friendlyAnts += 1;
+            foragerCollection.add(new ForagerAnt());
         }
 
         for (int i = 0; i < 4; ++i) {
-            Ant temp = new Ant("scout");
-            queenSQ.scoutAnts.add(temp);
-            scoutCollection.add(temp);
+            colonyEntrance.friendlyAnts += 1;
+            scoutCollection.add(new Ant("scout"));
         }
 
+        //Reveal squares adjacent to the colony
         for (int i = 12; i < 15; ++i) {
             for (int j = 12; j < 15; ++j) {
                 board[i][j].revealState = true;

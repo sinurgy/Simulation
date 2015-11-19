@@ -11,13 +11,13 @@ public class TimeManager {
     }
 
     public void TakeTurn() {
-        if (Main.environment.board[13][13].foodUnits > 0 && Main.environment.board[13][13].queentAnt.lifeSpan > 0) {
+        if (Main.environment.board[13][13].foodUnits > 0 && Main.environment.queenAnt.lifeSpan > 0) {
 
             //Queen does something
-            Main.environment.board[13][13].queentAnt.eatFood();
+            Main.environment.queenAnt.eatFood();
 
             if (currentTurn == 1) {
-                Main.environment.board[13][13].queentAnt.hatchAnt();
+                Main.environment.queenAnt.hatchAnt();
             }
 
             //TODO: Scout does something
@@ -41,7 +41,7 @@ public class TimeManager {
         }
 
         else
-            Main.environment.board[13][13].queentAnt.mortality = true;
+            Main.environment.queenAnt.mortality = true;
     }
 
     public void incrementDay() {

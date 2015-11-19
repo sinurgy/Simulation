@@ -10,7 +10,7 @@ public class Main {
 
         TimeManager timeManager = new TimeManager();
 
-        while(environment.board[13][13].queentAnt.mortality == false) {
+        while(environment.queenAnt.mortality == false) {
             timeManager.TakeTurn();
             System.out.println();
 
