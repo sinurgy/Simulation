@@ -1,4 +1,4 @@
-
+import java.util.Objects;
 
 public class TimeManager {
     int currentDay;
@@ -13,6 +13,13 @@ public class TimeManager {
     public void TakeTurn() {
         if (Main.environment.board[13][13].foodUnits > 0 && Main.environment.queenAnt.lifeSpan > 0) {
 
+            //Bala ant enters colony
+            int balaRandom = Main.random.nextInt(99);
+            if (balaRandom == 0 || balaRandom == 1 || balaRandom == 2) {
+                Main.environment.balaCollection.add(new BalaAnt());
+                Main.environment.board[0][0].balaAnts += 1;
+            }
+
             //Queen does something
             Main.environment.queenAnt.eatFood();
 
@@ -20,16 +27,26 @@ public class TimeManager {
                 Main.environment.queenAnt.hatchAnt();
             }
 
-            //TODO: Scout does something
+            //TODO: Scouts do something
+            for (int i = 0; i < Main.environment.scoutCollection.size(); ++i) {
+                Main.environment.scoutCollection.get(i).move();
+                int currentX = Main.environment.scoutCollection.get(i).xLocation;
+                int currentY = Main.environment.scoutCollection.get(i).yLocation;
+                if(Main.environment.board[currentX][currentY].revealState == false)
+                    Main.environment.board[currentX][currentY].revealState = true;
+
+            }
 
 
-            //TODO: Soldier does something
+
+            //TODO: Soldiers do something
 
 
-            //TODO: Forager does something
+            //TODO: Foragers do something
 
 
-            //TODO: Bala does something
+            //TODO: Balas do something
+
 
             currentTurn++;
 

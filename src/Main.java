@@ -19,11 +19,23 @@ public class Main {
 
         }
 
-        System.out.println();
+        TestScout();
 
 
 
 
+
+
+
+
+    }
+
+    static void TestScout()  {
+        for (int i = 0; i < environment.scoutCollection.size() ; i++) {
+            System.out.println(environment.scoutCollection.get(i).xLocation + " , "
+                    + environment.scoutCollection.get(i).yLocation + ": "
+                    + environment.board[environment.scoutCollection.get(i).xLocation][environment.scoutCollection.get(i).yLocation].revealState);
+        }
 
     }
 

@@ -16,7 +16,7 @@ public class QueenAnt extends Ant {
         }
 
         else if(antType == 1) {
-            Main.environment.scoutCollection.add(new Ant("scout"));
+            Main.environment.scoutCollection.add(new ScoutAnt());
         }
 
         else

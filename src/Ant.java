@@ -9,25 +9,21 @@ public class Ant {
     boolean mortality;
     int xLocation;
     int yLocation;
-    static int lastScoutID = 0;
 
-    public Ant () {
+
+/*    public Ant () {
         currentAge = 0.0;
         lifeSpan = 360;
-    }
+        xLocation = 13;
+        yLocation = 13;
+    }*/
 
-    public Ant (String scoutAnt) {
-        lastScoutID++;
-        ID = lastScoutID;
-        currentAge = 0.0;
-        lifeSpan = 360;
-    }
 
     public void move() {
 
 
 
-        System.out.println();
+
 
 
     }

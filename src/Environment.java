@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class Environment {
     Square[][] board = new Square[27][27];
-    ArrayList soldierCollection;
-    ArrayList foragerCollection;
-    ArrayList scoutCollection;
-    ArrayList balaCollection;
+    ArrayList<SoldierAnt> soldierCollection;
+    ArrayList<ForagerAnt> foragerCollection;
+    ArrayList<ScoutAnt> scoutCollection;
+    ArrayList<BalaAnt> balaCollection;
     QueenAnt queenAnt;
 
 
@@ -46,7 +46,7 @@ public class Environment {
 
         for (int i = 0; i < 4; ++i) {
             colonyEntrance.friendlyAnts += 1;
-            scoutCollection.add(new Ant("scout"));
+            scoutCollection.add(new ScoutAnt());
         }
 
         //Reveal squares adjacent to the colony
