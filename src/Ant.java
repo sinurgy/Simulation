@@ -28,9 +28,5 @@ public class Ant {
 
     }
 
-    public void takeTurn() {
-
-
-    }
 
 }

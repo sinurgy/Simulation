@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
@@ -8,18 +9,22 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+
         TimeManager timeManager = new TimeManager();
 
         while(environment.queenAnt.mortality == false) {
             timeManager.TakeTurn();
-            System.out.println();
+            System.out.println(environment.board[13][13].foodUnits);
 
 
 
 
         }
 
-        TestScout();
+        System.out.println();
+
+
 
 
 
@@ -37,6 +42,13 @@ public class Main {
                     + environment.board[environment.scoutCollection.get(i).xLocation][environment.scoutCollection.get(i).yLocation].revealState);
         }
 
+    }
+
+    static void TestAdjacentCollection () {
+        ArrayList sampleSquare = environment.getAdjacentSquares(environment.board[0][0]);
+        sampleSquare = environment.getAdjacentSquares(environment.board[0][26]);
+        sampleSquare = environment.getAdjacentSquares(environment.board[26][0]);
+        sampleSquare = environment.getAdjacentSquares(environment.board[26][26]);
     }
 
 

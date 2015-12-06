@@ -6,6 +6,7 @@ public class Environment {
     ArrayList<ForagerAnt> foragerCollection;
     ArrayList<ScoutAnt> scoutCollection;
     ArrayList<BalaAnt> balaCollection;
+
     QueenAnt queenAnt;
 
 
@@ -20,7 +21,7 @@ public class Environment {
         //Builds the board of squars, determines which squares get food and how much
         for(int i = 0; i < 27; ++i) {
             for (int j = 0; j < 27; ++j) {
-                board[i][j] = new Square();
+                board[i][j] = new Square(i, j);
                 if (Main.random.nextInt(4) == 0) {
                     board[i][j].foodUnits = Main.random.nextInt(501) + 500;
                 }
@@ -55,7 +56,44 @@ public class Environment {
                 board[i][j].revealState = true;
             }
         }
-
-
     }
+
+     public ArrayList<Square> getAdjacentSquares (Square currentSquare) {
+
+         ArrayList<Square> adjacentCollection = new ArrayList<>();
+
+         int xMin = -1;
+         int xMax = 2;
+         int yMin = -1;
+         int yMax = 2;
+
+         if (currentSquare.myXLocation == 0)
+             xMin = 0;
+
+         if (currentSquare.myXLocation == 26)
+             xMax = 1;
+
+         if (currentSquare.myYLocation == 0)
+             yMin = 0;
+
+         else if (currentSquare.myYLocation == 26)
+             yMax = 1;
+
+
+         boolean centerCheck = false;
+
+         for (int i = xMin; i < xMax; i++) {
+             for (int j = yMin; j < yMax; j++) {
+                 if (i == 0 && j == 0)
+                     centerCheck = true;
+
+                 if (centerCheck == false)
+                     adjacentCollection.add(board[i + currentSquare.myXLocation][j + currentSquare.myYLocation]);
+                 else
+                    centerCheck = false;
+             }
+         }
+
+         return adjacentCollection;
+     }
 }

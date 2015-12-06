@@ -10,30 +10,34 @@ public class ScoutAnt extends Ant {
         yLocation = 13;
     }
 
-    public void move() {
+    public void move(ScoutAnt thisAnt) {
         int xRandom;
         int yRandom;
 
-        if (this.xLocation == 0)
+        if (thisAnt.xLocation == 0)
             xRandom = Main.random.nextInt(2);
 
-        else if (this.xLocation == 26)
+        else if (thisAnt.xLocation == 26)
             xRandom = Main.random.nextInt(2) - 1;
 
         else
             xRandom = Main.random.nextInt(3) - 1;
 
-        if (this.yLocation == 0)
+
+
+        if (thisAnt.yLocation == 0)
             yRandom = Main.random.nextInt(2);
 
-        else if (this.yLocation == 26)
+        else if (thisAnt.yLocation == 26)
             yRandom = Main.random.nextInt(2) - 1;
 
         else
             yRandom = Main.random.nextInt(3) - 1;
 
+
         if(xRandom == 0 && yRandom == 0)
             move();  //holy crap I just did recursion without being forced to!!! haha
+
         else {
             this.xLocation += xRandom;
             this.yLocation += yRandom;

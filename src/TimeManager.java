@@ -27,14 +27,13 @@ public class TimeManager {
                 Main.environment.queenAnt.hatchAnt();
             }
 
-            //TODO: Scouts do something
+            //Scouts do something
             for (int i = 0; i < Main.environment.scoutCollection.size(); ++i) {
-                Main.environment.scoutCollection.get(i).move();
+                Main.environment.scoutCollection.get(i).move(Main.environment.scoutCollection.get(i));
                 int currentX = Main.environment.scoutCollection.get(i).xLocation;
                 int currentY = Main.environment.scoutCollection.get(i).yLocation;
                 if(Main.environment.board[currentX][currentY].revealState == false)
                     Main.environment.board[currentX][currentY].revealState = true;
-
             }
 
 
@@ -43,6 +42,9 @@ public class TimeManager {
 
 
             //TODO: Foragers do something
+            for (int i = 0; i < Main.environment.foragerCollection.size(); ++i) {
+                Main.environment.foragerCollection.get(i).move(Main.environment.foragerCollection.get(i));
+            }
 
 
             //TODO: Balas do something
@@ -52,7 +54,6 @@ public class TimeManager {
 
             if (currentTurn == 11) {
                 ++currentDay;
-
                 currentTurn = 1;
             }
         }
