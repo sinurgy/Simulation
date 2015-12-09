@@ -4,7 +4,6 @@ import java.util.Random;
 public class Main {
 
     public static Random random = new Random();
-
     public static Environment environment = new Environment();
 
     public static void main(String[] args) {
@@ -13,13 +12,9 @@ public class Main {
 
         TimeManager timeManager = new TimeManager();
 
-        while(environment.queenAnt.mortality == false) {
+        while (environment.queenAnt.mortality == false) {
             timeManager.TakeTurn();
-            System.out.println(environment.board[13][13].foodUnits);
-
-
-
-
+            System.out.println();
         }
 
         System.out.println();

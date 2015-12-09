@@ -11,7 +11,7 @@ public class ForagerAnt extends Ant {
         lastIDUSed++;
         ID = lastIDUSed;
         forageMode = true;
-        currentAge = 0.0;
+        currentAge = 1;
         lifeSpan = 360;
         xLocation = 13;
         yLocation = 13;
@@ -19,11 +19,11 @@ public class ForagerAnt extends Ant {
         moveHistory.push(initialLocation);
     }
 
-    public void move(ForagerAnt thisAnt) {
-        Square thisSquare = Main.environment.board[thisAnt.xLocation][thisAnt.yLocation];
+    public void takeTurn(ForagerAnt thisForager) {
+        Square thisSquare = Main.environment.board[thisForager.xLocation][thisForager.yLocation];
 
         //Forage movement
-        if (thisAnt.forageMode == true) {
+        if (thisForager.forageMode == true) {
 
             ArrayList<Square> adjacentCollection = Main.environment.getAdjacentSquares(thisSquare);
             ArrayList<Square> highestPheromones = createPheromoneCollection(adjacentCollection);
@@ -31,25 +31,27 @@ public class ForagerAnt extends Ant {
 
             //Moving this ant
             if (highestPheromones.size() == 1) {
-                thisAnt.xLocation = highestPheromones.get(0).myXLocation;
-                thisAnt.yLocation = highestPheromones.get(0).myYLocation;
+                thisSquare = highestPheromones.get(0);
+                thisForager.xLocation = thisSquare.myXLocation;
+                thisForager.yLocation = thisSquare.myYLocation;
             }
 
             else {
-                thisAnt.xLocation = highestPheromones.get(Main.random.nextInt(highestPheromones.size())).myXLocation;
-                thisAnt.yLocation = highestPheromones.get(Main.random.nextInt(highestPheromones.size())).myYLocation;
+                thisSquare = highestPheromones.get(Main.random.nextInt(highestPheromones.size()));
+                thisForager.xLocation = thisSquare.myXLocation;
+                thisForager.yLocation = thisSquare.myYLocation;
             }
 
             //Adding to move history
-            nextLocation = new MoveObj(thisAnt.xLocation, thisAnt.yLocation);
+            nextLocation = new MoveObj(thisForager.xLocation, thisForager.yLocation);
             moveHistory.push(nextLocation);
 
             //Update thisSquare
-            thisSquare = Main.environment.board[thisAnt.xLocation][thisAnt.yLocation];
+            thisSquare = Main.environment.board[thisForager.xLocation][thisForager.yLocation];
 
             //Pick up food
             if (thisSquare.myXLocation != 13 && thisSquare.myYLocation != 13 && thisSquare.foodUnits > 0)
-                pickUpFood(thisAnt, thisSquare);
+                pickUpFood(thisForager, thisSquare);
         }
 
         //Return to nest movement
@@ -57,38 +59,30 @@ public class ForagerAnt extends Ant {
             MoveObj lastMove = moveHistory.pop();
 
             if (moveHistory.size() == 0)
-                depositFood(thisAnt, lastMove);
+                depositFood(thisForager, lastMove);
 
             else {
-                thisAnt.xLocation = lastMove.xLocation;
-                thisAnt.yLocation = lastMove.yLocation;
-                Main.environment.board[thisAnt.xLocation][thisAnt.yLocation].phermoneUnits += 10;
+                thisForager.xLocation = lastMove.xLocation;
+                thisForager.yLocation = lastMove.yLocation;
+                if (Main.environment.board[thisForager.xLocation][thisForager.yLocation].phermoneUnits < 1000)
+                    Main.environment.board[thisForager.xLocation][thisForager.yLocation].phermoneUnits += 10;
             }
         }
     }
 
-    private ArrayList<Square> createPheromoneCollection(ArrayList<Square> adjacentCollection) {
-        ArrayList<Square> highestPheromones = new ArrayList<>();
-        int currentHighPheromone = 0;
 
-        for (int i = 0; i < adjacentCollection.size(); ++i) {
-            if (adjacentCollection.get(i).phermoneUnits >= currentHighPheromone && adjacentCollection.get(i).revealState == true) {
-                currentHighPheromone = adjacentCollection.get(i).phermoneUnits;
-                highestPheromones.add(adjacentCollection.get(i));
-            }
-        }
-
-        return highestPheromones;
-    }
 
     private void pickUpFood(ForagerAnt thisAnt, Square thisSquare) {
         thisSquare.foodUnits--;
-        thisSquare.phermoneUnits += 10;
+        if (thisSquare.phermoneUnits < 1000)
+            thisSquare.phermoneUnits += 10;
         thisAnt.forageMode = false;
         moveHistory.pop();
     }
 
     private void depositFood (ForagerAnt thisAnt, MoveObj lastMove) {
+        thisAnt.xLocation = 13;
+        thisAnt.yLocation = 13;
         Main.environment.board[lastMove.xLocation][lastMove.yLocation].foodUnits++;
         thisAnt.forageMode = true;
         moveHistory.push(lastMove);
@@ -103,6 +97,21 @@ public class ForagerAnt extends Ant {
             xLocation = X;
             yLocation = Y;
         }
+    }
+
+    private ArrayList<Square> createPheromoneCollection(ArrayList<Square> adjacentCollection) {
+
+        ArrayList<Square> highestPheromones = new ArrayList<>();
+        int currentHighPheromone = 0;
+
+        for (int i = 0; i < adjacentCollection.size(); ++i) {
+            if (adjacentCollection.get(i).phermoneUnits >= currentHighPheromone && adjacentCollection.get(i).revealState == true) {
+                currentHighPheromone = adjacentCollection.get(i).phermoneUnits;
+                highestPheromones.add(adjacentCollection.get(i));
+            }
+        }
+
+        return highestPheromones;
     }
 
 

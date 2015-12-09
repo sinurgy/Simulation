@@ -18,7 +18,7 @@ public class Environment {
         balaCollection = new ArrayList();
         queenAnt = new QueenAnt();
 
-        //Builds the board of squars, determines which squares get food and how much
+        //Builds the board of squares, determines which squares get food and how much
         for(int i = 0; i < 27; ++i) {
             for (int j = 0; j < 27; ++j) {
                 board[i][j] = new Square(i, j);
@@ -58,6 +58,7 @@ public class Environment {
         }
     }
 
+    //Returns a collection of legal adjacent squares; omits current square from collection
      public ArrayList<Square> getAdjacentSquares (Square currentSquare) {
 
          ArrayList<Square> adjacentCollection = new ArrayList<>();
@@ -81,7 +82,6 @@ public class Environment {
 
 
          boolean centerCheck = false;
-
          for (int i = xMin; i < xMax; i++) {
              for (int j = yMin; j < yMax; j++) {
                  if (i == 0 && j == 0)

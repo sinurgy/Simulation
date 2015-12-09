@@ -3,7 +3,7 @@ public class QueenAnt extends Ant {
     public QueenAnt() {
         ID = 0;
         lifeSpan = 7200;
-        mortality = false;
+        currentAge = 1;
     }
 
     public void hatchAnt() {
@@ -24,6 +24,7 @@ public class QueenAnt extends Ant {
     }
 
     public void eatFood() {
-        Main.environment.board[13][13].foodUnits -= 1;
+
+        Main.environment.board[13][13].foodUnits--;
     }
 }

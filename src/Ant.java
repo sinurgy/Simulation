@@ -5,8 +5,8 @@ public class Ant {
 
     int ID;
     int lifeSpan;
-    double currentAge;
-    boolean mortality;
+    int currentAge;
+    boolean mortality = false;
     int xLocation;
     int yLocation;
 
@@ -19,13 +19,7 @@ public class Ant {
     }*/
 
 
-    public void move() {
-
-
-
-
-
-
+    public void takeTurn() {
     }
 
 

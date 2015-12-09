@@ -1,6 +1,7 @@
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class TimeManager {
+public class TimeManager  {
     int currentDay;
     int currentTime;
     int currentTurn;
@@ -20,40 +21,40 @@ public class TimeManager {
                 Main.environment.board[0][0].balaAnts += 1;
             }
 
-            //Queen does something
+            //Queen takes a turn
             Main.environment.queenAnt.eatFood();
-
             if (currentTurn == 1) {
                 Main.environment.queenAnt.hatchAnt();
             }
 
-            //Scouts do something
+            //Scouts take a turn
             for (int i = 0; i < Main.environment.scoutCollection.size(); ++i) {
-                Main.environment.scoutCollection.get(i).move(Main.environment.scoutCollection.get(i));
-                int currentX = Main.environment.scoutCollection.get(i).xLocation;
-                int currentY = Main.environment.scoutCollection.get(i).yLocation;
-                if(Main.environment.board[currentX][currentY].revealState == false)
-                    Main.environment.board[currentX][currentY].revealState = true;
+                Main.environment.scoutCollection.get(i).takeTurn(Main.environment.scoutCollection.get(i));
             }
 
-
-
-            //TODO: Soldiers do something
-
-
-            //TODO: Foragers do something
+            //Foragers take a turn
             for (int i = 0; i < Main.environment.foragerCollection.size(); ++i) {
-                Main.environment.foragerCollection.get(i).move(Main.environment.foragerCollection.get(i));
+                Main.environment.foragerCollection.get(i).takeTurn(Main.environment.foragerCollection.get(i));
             }
 
+            //Soldiers take a turn
+            for (int i = 0; i < Main.environment.soldierCollection.size(); ++i) {
+                Main.environment.soldierCollection.get(i).takeTurn(Main.environment.soldierCollection.get(i));
+            }
 
-            //TODO: Balas do something
+            //Balas take a turn
+            for (int i = 0; i < Main.environment.balaCollection.size(); ++i) {
+                Main.environment.balaCollection.get(i).takeTurn(Main.environment.balaCollection.get(i));
+            }
 
+            //Remove ants killed by attacks
+            removeMurderedAnts();
 
             currentTurn++;
 
             if (currentTurn == 11) {
                 ++currentDay;
+                ageAnts();
                 currentTurn = 1;
             }
         }
@@ -62,15 +63,66 @@ public class TimeManager {
             Main.environment.queenAnt.mortality = true;
     }
 
-    public void incrementDay() {
 
+
+    public void ageAnts() {
+        for (int i = 0; i < Main.environment.scoutCollection.size(); ++i) {
+            ScoutAnt thisScout = Main.environment.scoutCollection.get(i);
+            thisScout.lifeSpan--;
+            if (thisScout.lifeSpan == 0)
+                Main.environment.scoutCollection.remove(i);
+        }
+
+        for (int i = 0; i < Main.environment.foragerCollection.size(); ++i) {
+            ForagerAnt thisForager = Main.environment.foragerCollection.get(i);
+            thisForager.lifeSpan--;
+            if (thisForager.lifeSpan == 0) {
+                if (thisForager.forageMode == true)
+                    Main.environment.board[thisForager.xLocation][thisForager.yLocation].foodUnits++;
+                Main.environment.foragerCollection.remove(i);
+            }
+        }
+
+        for (int i = 0; i < Main.environment.soldierCollection.size(); ++i) {
+            SoldierAnt thisSoldier = Main.environment.soldierCollection.get(i);
+            thisSoldier.lifeSpan--;
+            if (thisSoldier.lifeSpan == 0)
+                Main.environment.soldierCollection.remove(i);
+        }
+
+        for (int i = 0; i < Main.environment.balaCollection.size(); ++i) {
+            BalaAnt thisBala = Main.environment.balaCollection.get(i);
+            thisBala.lifeSpan--;
+            if (thisBala.lifeSpan == 0)
+                Main.environment.balaCollection.remove(i);
+        }
+
+        Main.environment.queenAnt.lifeSpan--;
+        if (Main.environment.queenAnt.lifeSpan == 0)
+            Main.environment.queenAnt.mortality = true;
     }
 
-    public void decreasePhermone() {
+    public void removeMurderedAnts () {
+        for (int i = 0; i < Main.environment.scoutCollection.size(); ++i) {
+            if (Main.environment.scoutCollection.get(i).mortality == true)
+                Main.environment.scoutCollection.remove(i);
+        }
 
+        for (int i = 0; i < Main.environment.soldierCollection.size(); ++i) {
+            if (Main.environment.soldierCollection.get(i).mortality == true)
+                Main.environment.soldierCollection.remove(i);
+        }
+
+        for (int i = 0; i < Main.environment.foragerCollection.size(); ++i) {
+            if (Main.environment.foragerCollection.get(i).mortality == true)
+                Main.environment.foragerCollection.remove(i);
+        }
+
+        for (int i = 0; i < Main.environment.balaCollection.size(); ++i) {
+            if (Main.environment.balaCollection.get(i).mortality == true)
+                Main.environment.balaCollection.remove(i);
+        }
     }
 
-    public void removeDeadAnts() {
 
-    }
 }

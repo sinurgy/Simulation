@@ -1,23 +1,33 @@
+import java.util.ArrayList;
+
 public class ScoutAnt extends Ant {
     static int lastIDUsed = 0;
 
     public ScoutAnt() {
         lastIDUsed++;
         ID = lastIDUsed;
-        currentAge = 0.0;
+        currentAge = 1;
         lifeSpan = 360;
         xLocation = 13;
         yLocation = 13;
     }
 
-    public void move(ScoutAnt thisAnt) {
-        int xRandom;
+    public void takeTurn(ScoutAnt thisScout) {
+        Square thisSquare = Main.environment.board[thisScout.xLocation][thisScout.yLocation];
+        ArrayList<Square> adjacentCollection = Main.environment.getAdjacentSquares(thisSquare);
+
+        thisSquare = adjacentCollection.get(Main.random.nextInt(adjacentCollection.size()));
+        thisScout.xLocation = thisSquare.myXLocation;
+        thisScout.yLocation = thisSquare.myYLocation;
+        thisSquare.revealState = true;
+
+/*      int xRandom;
         int yRandom;
 
-        if (thisAnt.xLocation == 0)
+        if (thisScout.xLocation == 0)
             xRandom = Main.random.nextInt(2);
 
-        else if (thisAnt.xLocation == 26)
+        else if (thisScout.xLocation == 26)
             xRandom = Main.random.nextInt(2) - 1;
 
         else
@@ -25,10 +35,10 @@ public class ScoutAnt extends Ant {
 
 
 
-        if (thisAnt.yLocation == 0)
+        if (thisScout.yLocation == 0)
             yRandom = Main.random.nextInt(2);
 
-        else if (thisAnt.yLocation == 26)
+        else if (thisScout.yLocation == 26)
             yRandom = Main.random.nextInt(2) - 1;
 
         else
@@ -42,5 +52,7 @@ public class ScoutAnt extends Ant {
             this.xLocation += xRandom;
             this.yLocation += yRandom;
         }
+*/
+
     }
 }
