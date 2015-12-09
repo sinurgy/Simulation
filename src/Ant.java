@@ -5,7 +5,6 @@ public class Ant {
 
     int ID;
     int lifeSpan;
-    int currentAge;
     boolean mortality = false;
     int xLocation;
     int yLocation;

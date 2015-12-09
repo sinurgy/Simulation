@@ -6,7 +6,6 @@ public class SoldierAnt extends Ant {
     public SoldierAnt() {
         lastIDUsed++;
         ID = lastIDUsed;
-        currentAge = 1;
         lifeSpan = 360;
         xLocation = 13;
         yLocation = 13;
@@ -16,7 +15,7 @@ public class SoldierAnt extends Ant {
         Square thisSquare = Main.environment.board[thisSoldier.xLocation][thisSoldier.yLocation];
 
         if (thisSquare.balaAnts > 0)
-            attack(thisSquare, thisSoldier);
+            attack(thisSquare);
 
         else {
 
@@ -44,7 +43,7 @@ public class SoldierAnt extends Ant {
 
     }
 
-    private void attack(Square thisSquare, SoldierAnt thisSoldier) {
+    private void attack(Square thisSquare) {
         ArrayList<BalaAnt> attackableCollection = new ArrayList<>();
 
         for (int i = 0; i < Main.environment.balaCollection.size() ; i++) {

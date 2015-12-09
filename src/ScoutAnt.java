@@ -6,7 +6,6 @@ public class ScoutAnt extends Ant {
     public ScoutAnt() {
         lastIDUsed++;
         ID = lastIDUsed;
-        currentAge = 1;
         lifeSpan = 360;
         xLocation = 13;
         yLocation = 13;

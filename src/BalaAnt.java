@@ -7,7 +7,6 @@ public class BalaAnt extends Ant {
     public BalaAnt() {
         lastIDUsed++;
         ID = lastIDUsed;
-        currentAge = 1;
         lifeSpan = 360;
         xLocation = 0;
         yLocation = 0;
@@ -17,7 +16,7 @@ public class BalaAnt extends Ant {
         Square thisSquare = Main.environment.board[thisBala.xLocation][thisBala.yLocation];
 
         if (thisSquare.friendlyAnts > 0)
-            attack(thisSquare, thisBala);
+            attack(thisSquare);
 
         else {
             ArrayList<Square> adjacentCollection = Main.environment.getAdjacentSquares(thisSquare);
@@ -31,7 +30,7 @@ public class BalaAnt extends Ant {
     }
 
 
-    private void attack(Square thisSquare, BalaAnt thisBala) {
+    private void attack(Square thisSquare) {
         ArrayList<Ant> attackableCollection = new ArrayList<>();
 
         if (thisSquare.myXLocation == 13 && thisSquare.myYLocation == 13)

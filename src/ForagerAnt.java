@@ -11,7 +11,6 @@ public class ForagerAnt extends Ant {
         lastIDUSed++;
         ID = lastIDUSed;
         forageMode = true;
-        currentAge = 1;
         lifeSpan = 360;
         xLocation = 13;
         yLocation = 13;

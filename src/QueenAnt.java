@@ -3,7 +3,6 @@ public class QueenAnt extends Ant {
     public QueenAnt() {
         ID = 0;
         lifeSpan = 7200;
-        currentAge = 1;
     }
 
     public void hatchAnt() {

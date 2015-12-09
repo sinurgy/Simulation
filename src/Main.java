@@ -9,23 +9,16 @@ public class Main {
     public static void main(String[] args) {
 
 
-
         TimeManager timeManager = new TimeManager();
+        AntSimGUI gui = new AntSimGUI();
+        gui.addSimulationEventListener(timeManager);
 
-        while (environment.queenAnt.mortality == false) {
+        /*while (environment.queenAnt.mortality == false) {
             timeManager.TakeTurn();
             System.out.println();
         }
 
-        System.out.println();
-
-
-
-
-
-
-
-
+        System.out.println();*/
 
 
     }

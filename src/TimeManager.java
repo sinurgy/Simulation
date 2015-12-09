@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class TimeManager  {
+public class TimeManager implements SimulationEventListener {
     int currentDay;
-    int currentTime;
     int currentTurn;
 
     public TimeManager() {
@@ -125,4 +124,44 @@ public class TimeManager  {
     }
 
 
+    @Override
+    public void simulationEventOccurred(SimulationEvent simEvent) {
+
+        if (simEvent.getEventType() == SimulationEvent.NORMAL_SETUP_EVENT)
+        {
+            // set up the antSim.simulation for normal operation
+        }
+        else if (simEvent.getEventType() == SimulationEvent.QUEEN_TEST_EVENT)
+        {
+            // set up antSim.simulation for testing the queen ant
+        }
+        else if (simEvent.getEventType() == SimulationEvent.SCOUT_TEST_EVENT)
+        {
+            // set up antSim.simulation for testing the scout ant
+        }
+        else if (simEvent.getEventType() == SimulationEvent.FORAGER_TEST_EVENT)
+        {
+            // set up antSim.simulation for testing the forager ant
+        }
+        else if (simEvent.getEventType() == SimulationEvent.SOLDIER_TEST_EVENT)
+        {
+            // set up antSim.simulation for testing the soldier ant
+        }
+        else if (simEvent.getEventType() == SimulationEvent.RUN_EVENT)
+        {
+            // run the antSim.simulation continuously
+            // this should just be a loop where each iteration of the loop calls your takeTurn method, until
+            // the simulation is over
+        }
+        else if (simEvent.getEventType() == SimulationEvent.STEP_EVENT)
+        {
+            // run the next turn of the antSim.simulation
+            // this is your takeTurn method
+            TakeTurn();
+        }
+        else
+        {
+            // invalid event occurred
+        }
+    }
 }
