@@ -296,11 +296,14 @@ public class ColonyNodeView extends JPanel
 	 *
 	 *	this method is used to hide the contents of the node represented by this view
 	 *	should only be used during initialization of the simulation
-	 */
+	 **/
+
 	public void hideNode()
 	{
 		setVisible(false);
 	}
+
+
 	
 	
 	/**

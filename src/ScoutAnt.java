@@ -19,6 +19,7 @@ public class ScoutAnt extends Ant {
         thisScout.xLocation = thisSquare.myXLocation;
         thisScout.yLocation = thisSquare.myYLocation;
         thisSquare.revealState = true;
+        thisSquare.nodeView.showNode();
 
 /*      int xRandom;
         int yRandom;

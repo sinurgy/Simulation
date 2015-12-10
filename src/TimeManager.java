@@ -18,6 +18,7 @@ public class TimeManager implements SimulationEventListener {
             if (balaRandom == 0 || balaRandom == 1 || balaRandom == 2) {
                 Main.environment.balaCollection.add(new BalaAnt());
                 Main.environment.board[0][0].balaAnts += 1;
+                Main.environment.board[0][0].nodeView.setBalaCount(Main.environment.balaCollection.size());
             }
 
             //Queen takes a turn

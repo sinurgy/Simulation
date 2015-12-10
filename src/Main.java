@@ -4,14 +4,21 @@ import java.util.Random;
 public class Main {
 
     public static Random random = new Random();
+    public static AntSimGUI gui = new AntSimGUI();
     public static Environment environment = new Environment();
+    public static TimeManager timeManager = new TimeManager();
+
+
 
     public static void main(String[] args) {
 
+        System.out.println();
 
-        TimeManager timeManager = new TimeManager();
-        AntSimGUI gui = new AntSimGUI();
-        gui.addSimulationEventListener(timeManager);
+
+
+
+
+
 
         /*while (environment.queenAnt.mortality == false) {
             timeManager.TakeTurn();

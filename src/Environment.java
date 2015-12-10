@@ -11,6 +11,9 @@ public class Environment {
 
 
     public Environment() {
+        ColonyView colonyView = new ColonyView(27, 27);
+        Main.gui.initGUI(colonyView);
+        Main.gui.addSimulationEventListener(Main.timeManager);
 
         soldierCollection = new ArrayList();
         foragerCollection = new ArrayList();
@@ -22,8 +25,10 @@ public class Environment {
         for(int i = 0; i < 27; ++i) {
             for (int j = 0; j < 27; ++j) {
                 board[i][j] = new Square(i, j);
+                colonyView.addColonyNodeView(board[i][j].nodeView, i, j);
                 if (Main.random.nextInt(4) == 0) {
                     board[i][j].foodUnits = Main.random.nextInt(501) + 500;
+                    board[i][j].nodeView.setFoodAmount(board[i][j].foodUnits);
                 }
             }
         }
@@ -31,29 +36,36 @@ public class Environment {
         Square colonyEntrance = board[13][13];
 
         colonyEntrance.revealState = true;
+        colonyEntrance.nodeView.showNode();
         colonyEntrance.queenPresent = true;
+        colonyEntrance.nodeView.setQueen(true);
         colonyEntrance.foodUnits = 1000;
+        colonyEntrance.nodeView.setFoodAmount(1000);
 
         //Populate the colony entrance with friendly ants
         for (int i = 0; i < 10; ++i) {
             colonyEntrance.friendlyAnts += 1;
             soldierCollection.add(new SoldierAnt());
+            colonyEntrance.nodeView.setSoldierCount(soldierCollection.size());
         }
 
         for (int i = 0; i < 50; ++i) {
             colonyEntrance.friendlyAnts += 1;
             foragerCollection.add(new ForagerAnt());
+            colonyEntrance.nodeView.setForagerCount(foragerCollection.size());
         }
 
         for (int i = 0; i < 4; ++i) {
             colonyEntrance.friendlyAnts += 1;
             scoutCollection.add(new ScoutAnt());
+            colonyEntrance.nodeView.setScoutCount(scoutCollection.size());
         }
 
         //Reveal squares adjacent to the colony
         for (int i = 12; i < 15; ++i) {
             for (int j = 12; j < 15; ++j) {
                 board[i][j].revealState = true;
+                board[i][j].nodeView.showNode();
             }
         }
     }
