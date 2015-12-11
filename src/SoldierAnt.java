@@ -18,29 +18,38 @@ public class SoldierAnt extends Ant {
             attack(thisSquare);
 
         else {
+            thisSquare.soldierAnts--;
+            thisSquare.nodeView.setSoldierCount(thisSquare.soldierAnts);
+            if (thisSquare.soldierAnts == 0)
+                thisSquare.nodeView.hideSoldierIcon();
 
             ArrayList<Square> adjacentCollection = Main.environment.getAdjacentSquares(thisSquare);
-            for (int i = 0; i < adjacentCollection.size(); i++) {
+
+            for (int i = adjacentCollection.size() - 1; i >= 0; i--) {
                 if (adjacentCollection.get(i).revealState == false)
                     adjacentCollection.remove(i);
             }
+
             ArrayList<Square> balaLocations = createBalaCollection(adjacentCollection);
 
             //Moving this ant
             if (balaLocations.size() == 0) {
                 thisSquare = adjacentCollection.get(Main.random.nextInt(adjacentCollection.size()));
+                thisSquare.soldierAnts++;
+                thisSquare.nodeView.setSoldierCount(thisSquare.soldierAnts);
                 thisSoldier.xLocation = thisSquare.myXLocation;
                 thisSoldier.yLocation = thisSquare.myYLocation;
+                thisSquare.nodeView.showSoldierIcon();
             }
             else {
                 thisSquare = balaLocations.get(Main.random.nextInt(balaLocations.size()));
+                thisSquare.soldierAnts++;
+                thisSquare.nodeView.setSoldierCount(thisSquare.soldierAnts);
                 thisSoldier.xLocation = thisSquare.myXLocation;
                 thisSoldier.yLocation = thisSquare.myYLocation;
+                thisSquare.nodeView.showSoldierIcon();
             }
         }
-
-
-
     }
 
     private void attack(Square thisSquare) {

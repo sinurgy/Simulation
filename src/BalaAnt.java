@@ -19,12 +19,20 @@ public class BalaAnt extends Ant {
             attack(thisSquare);
 
         else {
+            thisSquare.balaAnts--;
+            thisSquare.nodeView.setScoutCount(thisSquare.balaAnts);
+            if (thisSquare.balaAnts == 0)
+                thisSquare.nodeView.hideBalaIcon();
+
             ArrayList<Square> adjacentCollection = Main.environment.getAdjacentSquares(thisSquare);
 
             //Moving this ant
             thisSquare = adjacentCollection.get(Main.random.nextInt(adjacentCollection.size()));
+            thisSquare.balaAnts++;
+            thisSquare.nodeView.setBalaCount(thisSquare.balaAnts);
             thisBala.xLocation = thisSquare.myXLocation;
             thisBala.yLocation = thisSquare.myYLocation;
+            thisSquare.nodeView.showBalaIcon();
         }
 
     }

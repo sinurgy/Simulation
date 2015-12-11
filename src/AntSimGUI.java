@@ -234,6 +234,8 @@ public class AntSimGUI extends JFrame
 		
 		// label for displaying the time in the simulation
 		private JLabel timeLabel;
+
+		private JButton customButtom;
 		
 		// event handler for button press events
 		private ButtonHandler buttonHandler;
@@ -301,6 +303,10 @@ public class AntSimGUI extends JFrame
 			stepButton = new JButton("Step");
 			stepButton.addActionListener(buttonHandler);
 			stepButton.setToolTipText("Step through the simulation one turn at a time");
+
+			customButtom = new JButton("Custom");
+			customButtom.addActionListener(buttonHandler);
+			customButtom.setToolTipText("Used for custom debugging");
 			
 			// label for displaying simulation time
 			timeLabel = new JLabel();
@@ -320,6 +326,7 @@ public class AntSimGUI extends JFrame
 			this.add(soldierTestButton);
 			this.add(runButton);
 			this.add(stepButton);
+			this.add(customButtom);
 			this.add(timeLabel);
 		}
 	
@@ -392,6 +399,12 @@ public class AntSimGUI extends JFrame
 				{
 					// run the simulation one turn at a time
 					fireSimulationEvent(SimulationEvent.STEP_EVENT);
+				}
+
+				else if (b.getText().equals("Custom"))
+				{
+					// run the simulation one turn at a time
+					fireSimulationEvent(SimulationEvent.CUSTOM_EVENT);
 				}
 			}
 		}

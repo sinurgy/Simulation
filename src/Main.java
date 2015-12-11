@@ -5,9 +5,8 @@ public class Main {
 
     public static Random random = new Random();
     public static AntSimGUI gui = new AntSimGUI();
-    public static Environment environment = new Environment();
     public static TimeManager timeManager = new TimeManager();
-
+    public static Environment environment = new Environment();
 
 
     public static void main(String[] args) {

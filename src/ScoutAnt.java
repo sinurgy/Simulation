@@ -13,12 +13,19 @@ public class ScoutAnt extends Ant {
 
     public void takeTurn(ScoutAnt thisScout) {
         Square thisSquare = Main.environment.board[thisScout.xLocation][thisScout.yLocation];
-        ArrayList<Square> adjacentCollection = Main.environment.getAdjacentSquares(thisSquare);
+        thisSquare.scoutAnts--;
+        thisSquare.nodeView.setScoutCount(thisSquare.scoutAnts);
+        if (thisSquare.scoutAnts == 0)
+            thisSquare.nodeView.hideScoutIcon();
 
+        ArrayList<Square> adjacentCollection = Main.environment.getAdjacentSquares(thisSquare);
         thisSquare = adjacentCollection.get(Main.random.nextInt(adjacentCollection.size()));
         thisScout.xLocation = thisSquare.myXLocation;
         thisScout.yLocation = thisSquare.myYLocation;
         thisSquare.revealState = true;
+        thisSquare.scoutAnts++;
+        thisSquare.nodeView.setScoutCount(thisSquare.scoutAnts);
+        thisSquare.nodeView.showScoutIcon();
         thisSquare.nodeView.showNode();
 
 /*      int xRandom;
@@ -53,6 +60,5 @@ public class ScoutAnt extends Ant {
             this.yLocation += yRandom;
         }
 */
-
     }
 }

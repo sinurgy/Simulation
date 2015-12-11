@@ -37,6 +37,7 @@ public class Environment {
 
         colonyEntrance.revealState = true;
         colonyEntrance.nodeView.showNode();
+        colonyEntrance.nodeView.showQueenIcon();
         colonyEntrance.queenPresent = true;
         colonyEntrance.nodeView.setQueen(true);
         colonyEntrance.foodUnits = 1000;
@@ -46,20 +47,26 @@ public class Environment {
         for (int i = 0; i < 10; ++i) {
             colonyEntrance.friendlyAnts += 1;
             soldierCollection.add(new SoldierAnt());
-            colonyEntrance.nodeView.setSoldierCount(soldierCollection.size());
+            colonyEntrance.soldierAnts++;
+            colonyEntrance.nodeView.setSoldierCount(colonyEntrance.soldierAnts);
         }
+        colonyEntrance.nodeView.showSoldierIcon();
 
         for (int i = 0; i < 50; ++i) {
             colonyEntrance.friendlyAnts += 1;
             foragerCollection.add(new ForagerAnt());
-            colonyEntrance.nodeView.setForagerCount(foragerCollection.size());
+            colonyEntrance.foragerAnts++;
+            colonyEntrance.nodeView.setForagerCount(colonyEntrance.foragerAnts);
         }
+        colonyEntrance.nodeView.showForagerIcon();
 
         for (int i = 0; i < 4; ++i) {
             colonyEntrance.friendlyAnts += 1;
             scoutCollection.add(new ScoutAnt());
-            colonyEntrance.nodeView.setScoutCount(scoutCollection.size());
+            colonyEntrance.scoutAnts++;
+            colonyEntrance.nodeView.setScoutCount(colonyEntrance.scoutAnts);
         }
+        colonyEntrance.nodeView.showScoutIcon();
 
         //Reveal squares adjacent to the colony
         for (int i = 12; i < 15; ++i) {
@@ -108,4 +115,5 @@ public class Environment {
 
          return adjacentCollection;
      }
+
 }

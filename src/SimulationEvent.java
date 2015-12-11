@@ -34,6 +34,8 @@ public class SimulationEvent extends EventObject
 	
 	// run simulation one turn at a time
 	public final static int STEP_EVENT = 6;
+
+	public final static int CUSTOM_EVENT = 7;
 	
 	
 	/*************
